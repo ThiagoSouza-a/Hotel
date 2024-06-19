@@ -1,16 +1,23 @@
 package com.hospedagem.Hotel.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 
 @Entity
 @Table(name = "tb_hotel")
+@Data
 public class Hotel implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -22,6 +29,11 @@ public class Hotel implements Serializable {
 	private String localizacao;
 	private Integer quartos;
 
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "hotel")
+	private List<Reserva> reservas = new ArrayList<>();
+
 	public Hotel() {
 		
 	}
@@ -30,38 +42,6 @@ public class Hotel implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.localizacao = localizacao;
-		this.quartos = quartos;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getLocalizacao() {
-		return localizacao;
-	}
-
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
-	}
-
-	public Integer getQuartos() {
-		return quartos;
-	}
-
-	public void setQuartos(Integer quartos) {
 		this.quartos = quartos;
 	}
 
