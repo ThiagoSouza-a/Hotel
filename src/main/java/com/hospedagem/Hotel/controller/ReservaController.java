@@ -3,10 +3,13 @@ package com.hospedagem.Hotel.controller;
 import com.hospedagem.Hotel.entities.Reserva;
 import com.hospedagem.Hotel.services.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,15 +36,27 @@ public class ReservaController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @PutMapping(value = "alterarhotel/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Reserva> updateDates(
             @PathVariable Long id,
-            @RequestParam String checkin,
-            @RequestParam String checkout) {
-        LocalDate checkinDate = LocalDate.parse(checkin);
-        LocalDate checkoutDate = LocalDate.parse(checkout);
-        Reserva updatedReserva = service.updateDates(id, checkinDate, checkoutDate);
-        return ResponseEntity.ok().body(updatedReserva);
+            @RequestBody Reserva updatedReserva) {
+        Reserva obj = service.findById(id);
+        LocalDate checkinDate = updatedReserva.getCheckin();
+        LocalDate checkoutDate = updatedReserva.getCheckout();
+        obj.updateDates(checkinDate, checkoutDate);
+        Reserva salvarReserva = service.updateDates(id, checkinDate, checkoutDate);
+        return ResponseEntity.ok().body(salvarReserva);
     }
+
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<Reserva> createReserva(@RequestBody Reserva novaReserva) {
+        Reserva obj = service.createReserva(novaReserva);
+        return ResponseEntity.ok().body(obj);
+    }
+
+
+
+
+
 
 }

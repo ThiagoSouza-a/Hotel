@@ -1,8 +1,6 @@
 package com.hospedagem.Hotel.services;
 
-import com.hospedagem.Hotel.entities.Hotel;
 import com.hospedagem.Hotel.entities.Reserva;
-import com.hospedagem.Hotel.repositories.HotelRepository;
 import com.hospedagem.Hotel.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,12 @@ public class ReservaService {
         Reserva obj = findById(id);
         obj.updateDates(checkin, checkout);
         return repository.save(obj);
+    }
+
+
+    public Reserva createReserva(Reserva reserva) {
+        reserva.updateDates(reserva.getCheckin(), reserva.getCheckout());
+        return repository.save(reserva);
     }
 
 }

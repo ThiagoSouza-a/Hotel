@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -35,9 +34,9 @@ public class TestConfig implements CommandLineRunner {
         Hotel h1 = new Hotel(null, "Hotel A", "Blumenau - SC", 4);
         Hotel h2 = new Hotel(null, "Hotel B", "Gaspar - SC", 6);
 
-        Reserva r1 = new Reserva(null, LocalDate.parse("2024-06-20"),LocalDate.parse("2024-06-22"), h1);
-        Reserva r2 = new Reserva(null, LocalDate.parse("2024-04-10"),LocalDate.parse("2024-04-15"), h2);
-        Reserva r3 = new Reserva(null, LocalDate.parse("2024-04-16"),LocalDate.parse("2024-04-18"), h1);
+        Reserva r1 = new Reserva(null, LocalDate.parse("2024-07-20"),LocalDate.parse("2024-07-22"), h1);
+        Reserva r2 = new Reserva(null, LocalDate.parse("2024-06-25"),LocalDate.parse("2024-06-26"), h2);
+        Reserva r3 = new Reserva(null, LocalDate.parse("2024-07-10"),LocalDate.parse("2024-07-12"), h1);
 
         hotelRepository.saveAll(Arrays.asList(h1, h2));
 
