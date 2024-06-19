@@ -36,26 +36,12 @@ public class ReservaController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Reserva> updateDates(
-            @PathVariable Long id,
-            @RequestBody Reserva updatedReserva) {
-        Reserva obj = service.findById(id);
-        LocalDate checkinDate = updatedReserva.getCheckin();
-        LocalDate checkoutDate = updatedReserva.getCheckout();
-        obj.updateDates(checkinDate, checkoutDate);
-        Reserva salvarReserva = service.updateDates(id, checkinDate, checkoutDate);
-        return ResponseEntity.ok().body(salvarReserva);
-    }
 
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/solicitar")
     public ResponseEntity<Reserva> createReserva(@RequestBody Reserva novaReserva) {
         Reserva obj = service.createReserva(novaReserva);
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
-
-
-
 
 
 

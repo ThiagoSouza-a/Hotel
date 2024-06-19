@@ -1,7 +1,5 @@
 package com.hospedagem.Hotel.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +28,6 @@ public class Reserva implements Serializable {
 
     private LocalDate checkout;
 
-
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
@@ -55,10 +52,6 @@ public class Reserva implements Serializable {
     }
 
     private void validateDates(LocalDate checkin, LocalDate checkout) {
-        LocalDate now = LocalDate.now();
-        if (checkin.isBefore(now) || checkout.isBefore(now)) {
-            throw new IllegalArgumentException("Para que possa atualizar a reserva, informe uma data futura");
-        }
         if (!checkout.isAfter(checkin)) {
             throw new IllegalArgumentException("A data de checkout deve ser posterior a data de checkin");
         }
