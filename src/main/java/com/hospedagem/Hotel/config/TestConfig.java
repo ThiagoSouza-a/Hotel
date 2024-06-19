@@ -10,13 +10,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
+
+
 
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     @Autowired
     private HotelRepository hotelRepository;
 
@@ -30,9 +35,9 @@ public class TestConfig implements CommandLineRunner {
         Hotel h1 = new Hotel(null, "Hotel A", "Blumenau - SC", 4);
         Hotel h2 = new Hotel(null, "Hotel B", "Gaspar - SC", 6);
 
-        Reserva r1 = new Reserva(null, Instant.parse("2024-06-20T00:00:00Z"),Instant.parse("2024-06-24T00:00:00Z"), h1);
-        Reserva r2 = new Reserva(null, Instant.parse("2024-07-21T00:00:00Z"),Instant.parse("2024-07-23T00:00:00Z"), h2);
-        Reserva r3 = new Reserva(null, Instant.parse("2024-07-22T00:00:00Z"), Instant.parse("2024-07-24T00:00:00Z"), h1);
+        Reserva r1 = new Reserva(null, LocalDate.parse("2024-06-20"),LocalDate.parse("2024-06-22"), h1);
+        Reserva r2 = new Reserva(null, LocalDate.parse("2024-04-10"),LocalDate.parse("2024-04-15"), h2);
+        Reserva r3 = new Reserva(null, LocalDate.parse("2024-04-16"),LocalDate.parse("2024-04-18"), h1);
 
         hotelRepository.saveAll(Arrays.asList(h1, h2));
 

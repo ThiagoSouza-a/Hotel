@@ -7,6 +7,7 @@ import com.hospedagem.Hotel.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,12 @@ public class ReservaService {
     public Reserva findById(Long id) {
         Optional<Reserva> obj = repository.findById(id);
         return obj.get();
+    }
+
+    public Reserva updateDates(Long id, LocalDate checkin, LocalDate checkout) {
+        Reserva obj = findById(id);
+        obj.updateDates(checkin, checkout);
+        return repository.save(obj);
     }
 
 }
